@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-
+    int REQUEST_CODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +38,18 @@ public class MainActivity extends AppCompatActivity {
                 Uri uri= Uri.parse(sharedText);
                 Intent uriIntent=new Intent(Intent.ACTION_VIEW, uri);
                 Intent chooserIntent=Intent.createChooser(uriIntent,"Switch Browser");
-                startActivity(chooserIntent);
-
-
+                startActivityForResult(chooserIntent, REQUEST_CODE);
+        }
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                // Close the app and remove it from recents screen
+                finishAffinity();
+            }
         }
     }
 
