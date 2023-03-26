@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         if (Intent.ACTION_SEND.equals(action) && type != null) {
             if ("text/plain".equals(type)) {
                 handleSendText(intent); // Handle text being sent
-                finishAffinity();
             }
         }
         else {
